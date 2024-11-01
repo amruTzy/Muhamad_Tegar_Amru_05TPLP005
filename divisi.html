@@ -1,0 +1,461 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: white;
+            color: black;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            overflow-y: auto;
+        }
+        .sidebar img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+        .sidebar h2 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .sidebar p {
+            font-size: 14px;
+            margin: 0;
+        }
+        .sidebar .menu {
+            width: 100%;
+            margin-top: 20px;
+        }
+        .sidebar .menu a {
+            display: block;
+            padding: 10px 20px;
+            color: black;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .sidebar .menu a.active {
+            background-color: #0056b3;
+            color: white;
+        }
+        .sidebar .menu a:hover {
+            background-color: #0056b3;
+            color: white;
+        }
+        .sidebar .menu p {
+            font-size: 14px;
+            font-weight: bold;
+            padding: 10px 20px;
+            margin: 0;
+        }
+        .sidebar .menu button {
+            display: block;
+            width: 100%;
+            padding: 10px 20px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            text-align: left;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .sidebar .menu button:hover {
+            background-color: #0056b3;
+        }
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            transition: margin-left 0.3s;
+        }
+        
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .content-header h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .content-header button {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .content-header button:hover {
+            background-color: #0056b3;
+        }
+        .content-header .user-info {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+        }
+        .content-header .user-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .table-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        .table-container table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .table-container table th, .table-container table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        .table-container table th {
+            background-color: #f2f2f2;
+        }
+        .table-container table td i {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .table-container table td i:hover {
+            color: #007bff;
+        }
+        @media (max-width: 768px) {
+        .sidebar {
+            width: 100%;
+            height: auto;
+            position: relative;
+        }
+        .content {
+            margin-left: 0;
+            padding: 10px;
+        }
+        .table-container {
+            padding: 10px;
+        }
+        .table-container table {
+            width: 100%;
+            overflow-x: auto; /* Menambahkan scroll horizontal jika tabel terlalu lebar */
+        }
+        .table-container table th, .table-container table td {
+            font-size: 12px; /* Mengurangi ukuran font untuk tampilan lebih baik */
+        }
+        .content-header h2 {
+            font-size: 20px; /* Mengurangi ukuran font judul */
+        }
+        .content-header button {
+            padding: 8px 16px; /* Mengurangi padding tombol */
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <img src="assets/profil.png" alt="User profile picture">
+        <h2>Welcome, Muhamad Tegar</h2>
+        <p>Administrator</p>
+        <div class="menu">
+            <a href="index.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <p>MENU KARYAWAN</p>
+            <a href="karyawan.html"><i class="fas fa-users"></i> Karyawan</a>
+            <a href="jabatan.html"><i class="fas fa-briefcase"></i> Jabatan</a>
+            <a href="divisi.html" class="active"><i class="fas fa-building"></i> Divisi</a>
+            <p>MENU ABSENSI</p>
+            <a href="absensi.html"><i class="fas fa-calendar-check"></i> Absensi</a>
+            <a href="izin.html"><i class="fas fa-envelope-open-text"></i> Izin</a>
+            <a href="lembur.html"><i class="fas fa-clock"></i> Lembur</a>
+            <p>MENU PENGGAJIAN</p>
+            <a href="SlipGaji.html"><i class="fas fa-file-alt"></i> Slip Gaji</a>
+            <a href="cetakSlipGaji.html"><i class="fas fa-print"></i> Cetak Slip Gaji</a>
+            <p>MENU LAPORAN</p>
+            <a href="cetakLaporan.html"><i class="fas fa-print"></i> Cetak Laporan</a>
+            <p>MENU ADMIN</p>
+            <a href="pengguna.html"><i class="fas fa-users-cog"></i> Pengguna</a>
+            <button><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+    </div>
+    <div class="content" id="content">
+        <div class="content-header">
+         <div class="user-info">
+            <img src="assets/profil.png" alt="User profile picture">
+        </div>
+        </div>
+        <div class="table-container">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4>Data Divisi</h4>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#addDivisiModal"><i class="fas fa-plus"></i> Tambah Divisi</button>
+            </div>
+            <!-- Modal untuk menambah divisi -->
+            <div class="modal fade" id="addDivisiModal" tabindex="-1" role="dialog" aria-labelledby="addDivisiModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addDivisiModalLabel">Tambah Divisi</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="addDivisiForm">
+                                <div class="form-group">
+                                    <label for="kodeDivisi">Kode Divisi</label>
+                                    <input type="text" class="form-control" id="kodeDivisi" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="namaDivisi">Nama Divisi</label>
+                                    <input type="text" class="form-control" id="namaDivisi" required>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                            <button type="button" class="btn btn-primary" id="saveDivisi">Simpan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between mb-3">
+                <div>
+                 Show
+                 <select class="custom-select" style="width: auto; display: inline-block;">
+                  <option value="10">
+                   10
+                  </option>
+                  <option value="25">
+                   25
+                  </option>
+                  <option value="50">
+                   50
+                  </option>
+                  <option value="100">
+                   100
+                  </option>
+                 </select>
+                 entries
+                </div>
+                <div>
+                 <input class="form-control" placeholder="Search" style="width: 200px; display: inline-block;" type="text" id="searchInput"/>
+                </div>
+               </div>
+               <table>
+                <thead>
+                 <tr>
+                  <th>
+                   No
+                  </th>
+                  <th>
+                   Kode Divisi
+                  </th>
+                  <th>
+                   Nama Divisi
+                  </th>
+                  <th>
+                   Aksi
+                  </th>
+                 </tr>
+                </thead>
+                <tbody>
+                 <tr>
+                  <td>
+                   1
+                  </td>
+                  <td>
+                   DIV001
+                  </td>
+                  <td>
+                   Umum
+                  </td>
+                  <td>
+                   <a href="#" onclick="editDivisi(this)">
+                    <i class="fas fa-edit" onclick="editDivisi(this)"></i>
+                   </a>
+                   <a href="#" onclick="hapusDivisi(this)">
+                    <i class="fas fa-times"></i>
+                   </a>
+                  </td>
+                 </tr>
+                 <tr>
+                  <td>
+                   2
+                  </td>
+                  <td>
+                   DIV002
+                  </td>
+                  <td>
+                   Keamanan
+                  </td>
+                  <td>
+                   <a href="#" onclick="editDivisi(this)">
+                    <i class="fas fa-edit" onclick="editDivisi(this)"></i>
+                   </a>
+                   <a href="#" onclick="hapusDivisi(this)">
+                    <i class="fas fa-times"></i>
+                   </a>
+                  </td>
+                 </tr>
+                 <tr>
+                  <td>
+                   3
+                  </td>
+                  <td>
+                   DIV003
+                  </td>
+                  <td>
+                   Kebersihan
+                  </td>
+                  <td>
+                   <a href="#" onclick="editDivisi(this)">
+                    <i class="fas fa-edit" onclick="editDivisi(this)"></i>
+                   </a>
+                   <a href="#" onclick="hapusDivisi(this)">
+                    <i class="fas fa-times"></i>
+                   </a>
+                  </td>
+                 </tr>
+                 <tr>
+                  <td>
+                   4
+                  </td>
+                  <td>
+                   DIV004
+                  </td>
+                  <td>
+                   IT
+                  </td>
+                  <td>
+                   <a href="#" onclick="editDivisi(this)">
+                    <i class="fas fa-edit" onclick="editDivisi(this)"></i>
+                   </a>
+                   <a href="#" onclick="hapusDivisi(this)">
+                    <i class="fas fa-times"></i>
+                   </a>
+                  </td>
+                 </tr>
+                </tbody>
+               </table>
+            </div>
+        </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Memuat data dari local storage saat halaman dimuat
+        window.onload = function() {
+            const storedDivisi = JSON.parse(localStorage.getItem('divisi')) || [];
+            const table = document.querySelector('.table-container table tbody');
+            storedDivisi.forEach((divisi, index) => {
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${divisi.kode}</td>
+                    <td>${divisi.nama}</td>
+                    <td>
+                        <a href="#" onclick="editDivisi(this)"><i class="fas fa-edit"></i></a>
+                        <a href="#" onclick="hapusDivisi(this)"><i class="fas fa-times"></i></a>
+                    </td>
+                `;
+                table.appendChild(newRow);
+            });
+        };
+
+        document.getElementById('saveDivisi').addEventListener('click', function() {
+            // Ambil nilai dari input
+            var kodeDivisi = document.getElementById('kodeDivisi').value;
+            var namaDivisi = document.getElementById('namaDivisi').value;
+
+            // Buat elemen baru untuk baris tabel
+            var table = document.querySelector('.table-container table tbody');
+            var newRow = document.createElement('tr');
+
+            // Tambahkan data
+            newRow.innerHTML = `
+                <td>${table.children.length + 1}</td>
+                <td>${kodeDivisi}</td>
+                <td>${namaDivisi}</td>
+                <td>
+                    <a href="#" onclick="editDivisi(this)"><i class="fas fa-edit"></i></a>
+                    <a href="#" onclick="hapusDivisi(this)"><i class="fas fa-times"></i></a>
+                </td>
+            `;
+
+            // Tambahkan baris baru ke tabel
+            table.appendChild(newRow);
+
+            // Simpan data ke local storage
+            const storedDivisi = JSON.parse(localStorage.getItem('divisi')) || [];
+            storedDivisi.push({ kode: kodeDivisi, nama: namaDivisi });
+            localStorage.setItem('divisi', JSON.stringify(storedDivisi));
+
+            // Tutup modal
+            $('#addDivisiModal').modal('hide');
+
+            // Reset form
+            document.getElementById('addDivisiForm').reset();
+        });
+
+        function editDivisi(element) {
+            // Ambil baris tabel yang sesuai
+            var row = element.closest('tr');
+            var kodeDivisi = row.cells[1].innerText;
+            var namaDivisi = row.cells[2].innerText;
+
+            // Set nilai ke input form
+            document.getElementById('kodeDivisi').value = kodeDivisi;
+            document.getElementById('namaDivisi').value = namaDivisi;
+
+            // Tampilkan modal
+            $('#addDivisiModal').modal('show');
+        }
+
+        function hapusDivisi(element) {
+            // Ambil baris tabel yang sesuai
+            var row = element.closest('tr');
+            row.remove();
+
+            // Hapus data dari local storage
+            const storedDivisi = JSON.parse(localStorage.getItem('divisi')) || [];
+            const kodeDivisi = row.cells[1].innerText;
+            const updatedDivisi = storedDivisi.filter(divisi => divisi.kode !== kodeDivisi);
+            localStorage.setItem('divisi', JSON.stringify(updatedDivisi));
+        }
+
+        // Fungsi untuk mencari data dalam tabel
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const tableBody = document.querySelector('.table-container table tbody');
+            const rows = tableBody.querySelectorAll('tr');
+
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                const rowText = Array.from(cells).map(cell => cell.textContent.toLowerCase()).join(' ');
+                row.style.display = rowText.includes(searchTerm) ? '' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
